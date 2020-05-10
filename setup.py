@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '0.0.1'
+VERSION = '0.1.0'
 PACKAGE_NAME = 'GPD'
 AUTHOR = 'Nitish Sharma'
 AUTHOR_EMAIL = 'nitish.sharma0712@gmail.com'
@@ -23,7 +23,13 @@ INSTALL_REQUIRES = [
       'random',
       'seaborn'
 ]
-
+CLASSIFIERS = [
+      'Programming Language :: Python :: 3.5',
+      'Programming Language :: Python :: 3.6',
+      'Programming Language :: Python :: 3.7',
+      'Programming Language :: Python :: 3.8',
+]
+PYTHON_REQUIRES = '>=3.5'
 setup(name=PACKAGE_NAME,
       version=VERSION,
       description=DESCRIPTION,
@@ -34,5 +40,6 @@ setup(name=PACKAGE_NAME,
       author_email=AUTHOR_EMAIL,
       url=URL,
       install_requires=INSTALL_REQUIRES,
-      packages=find_packages()
+      packages=find_packages(),
+      classifiers=CLASSIFIERS
       )
