@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 HERE = pathlib.Path(__file__).parent
 
 VERSION = '0.0.1'
-PACKAGE_NAME = 'pwmdists'
+PACKAGE_NAME = 'pwmdist'
 AUTHOR = 'Nitish Sharma'
 AUTHOR_EMAIL = 'nitish.sharma0712@gmail.com'
 URL = 'https://github.com/Nitish-Sharma01/pwmdist'
