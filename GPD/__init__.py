@@ -1,1 +1,3 @@
-from GPD import Fitbygpdpwm, gpdpwmFitCheck, gpdSimulation,gpdMoments, disttail, empericalplt, tailestimategpd, residualplot
+from . import (
+    gpdpwmFit, gpdplots
+    )
