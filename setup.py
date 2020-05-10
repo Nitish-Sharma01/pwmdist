@@ -1,9 +1,9 @@
 import pathlib
-from setuptools import setup, find_packages
+from setuptools import setup
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 PACKAGE_NAME = 'pwmdists'
 AUTHOR = 'Nitish Sharma'
 AUTHOR_EMAIL = 'nitish.sharma0712@gmail.com'
@@ -38,6 +38,6 @@ setup(name=PACKAGE_NAME,
       author_email=AUTHOR_EMAIL,
       url=URL,
       install_requires=INSTALL_REQUIRES,
-      packages=find_packages(),
+      packages=PACKAGE_NAME,
       classifiers=CLASSIFIERS
       )
