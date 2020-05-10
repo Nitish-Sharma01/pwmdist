@@ -1,5 +1,5 @@
 import pathlib
-from setuptools import setup
+from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 
@@ -38,6 +38,8 @@ setup(name=PACKAGE_NAME,
       author_email=AUTHOR_EMAIL,
       url=URL,
       install_requires=INSTALL_REQUIRES,
-      packages=PACKAGE_NAME,
+      packages=find_packages()
+      +find_packages(where="./GPD")
+      +find_packages(where="./pwmdist"),
       classifiers=CLASSIFIERS
       )
