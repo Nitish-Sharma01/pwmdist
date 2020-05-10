@@ -1,5 +1,5 @@
 
-from gpdpwmFit import *
+from GPD.gpdpwmFit import *
 
 
 
