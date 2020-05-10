@@ -9,7 +9,7 @@ AUTHOR = 'Nitish Sharma'
 AUTHOR_EMAIL = 'nitish.sharma0712@gmail.com'
 URL = 'https://github.com/Nitish-Sharma01/pwmdist'
 
-LICENSE = 'Apache License 2.0'
+LICENSE = 'MIT License'
 DESCRIPTION = 'package for essential statistics of extreme value distirbutions using probability weighted moments'
 LONG_DESCRIPTION = (HERE / "README.md").read_text()
 LONG_DESC_TYPE = "text/markdown"
