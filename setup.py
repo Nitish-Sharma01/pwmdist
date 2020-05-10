@@ -39,7 +39,6 @@ setup(name=PACKAGE_NAME,
       url=URL,
       install_requires=INSTALL_REQUIRES,
       packages=find_packages()
-      +find_packages(where="./GPD")
       +find_packages(where="./pwmdist"),
       classifiers=CLASSIFIERS
       )
