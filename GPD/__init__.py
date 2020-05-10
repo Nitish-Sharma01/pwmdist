@@ -1,10 +1,8 @@
-from .gpdpwmFit import *
-from .gpdplots import *
-    
-def _get_version_from_setuptools():
-    from pkg_resources import get_distribution
-    return get_distribution("GPD").version
+import sys
+import os
 
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
-__all__ = ['__version__']
-__version__ = _get_version_from_setuptools()
+from GPD import gpdpwmFit,gpdplots
