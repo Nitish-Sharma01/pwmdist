@@ -17,7 +17,6 @@ LONG_DESC_TYPE = "text/markdown"
 INSTALL_REQUIRES = [
       'numpy',
       'pandas',
-      'statistics',
       'scipy',
       'matplotlib',
       'random',
