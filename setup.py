@@ -19,7 +19,6 @@ INSTALL_REQUIRES = [
       'pandas',
       'scipy',
       'matplotlib',
-      'random',
       'seaborn'
 ]
 CLASSIFIERS = [
