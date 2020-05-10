@@ -1,6 +1,6 @@
-from . import (
-    gpdpwmFit, gpdplots
-    )
+from .gpdpwmFit import *
+from .gpdplots import *
+    
 def _get_version_from_setuptools():
     from pkg_resources import get_distribution
     return get_distribution("GPD").version
