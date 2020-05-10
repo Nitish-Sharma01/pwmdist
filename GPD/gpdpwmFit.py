@@ -7,14 +7,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy as si
 
-
-
 def Fitbygpdpwm(data, ci=0.95, threshold= None):
     """
     1) Description:
     The function fits Generalized pareto distiribution to the passed dataset; a timeseries object using probability weighted moments method.
     
-    2) Parameters:
+    2) Input Parameters:
         data: timeseries dataframe. 
         ci: confidence interval
         threshold: A float, A threshold number obtained from Peak over threshold method
@@ -58,7 +56,7 @@ def Fitbygpdpwm(data, ci=0.95, threshold= None):
     result_dict['Shape']=xi
     result_dict['Scale']=beta
     result_dict['prob']=1-len(exceedances)/len(data)
-    result_dict['Threshold']=threshold
+    result_dict['threshold']=threshold
     result_dict['exceedances']= exceedances
     result_dict['excess']=excess
     result_dict['residuals'] = np.log(1 + (xi * (np.array(exceedances)-threshold))/beta)/xi
@@ -84,9 +82,19 @@ def Fitbygpdpwm(data, ci=0.95, threshold= None):
 def gpdpwmFitCheck(data, ci=0.95, threshold=None):
 
     """
-    Description:
-    Checks the Fit of GPD with probability weighted moments
+    1) Description:
+        Checks the Fit of GPD with probability weighted moments
 
+    2) Input Parameters:
+        data= timeseries dataframe
+
+        ci= confidence interval
+        
+        threhsold=A float, A threshold number obtained from Peak over threshold method
+        If the threshold value is passed than the manual threshold value is used else the quantile at a given
+        confidence interval is used to calculate the threshold.
+    3) Results:
+        A dictionary of parameter estimates, threshold and excess. 
     """
     data=data.dropna()
     x = np.array(data.iloc[:,0].to_list())
@@ -115,11 +123,17 @@ def gpdpwmFitCheck(data, ci=0.95, threshold=None):
 
 
 def gpdSimulation(shape= 0.25, location = 0, scale = 1, n = 1000, seed = None):
-    # Description:
-    #   Generates random variates from a GPD distribution
+    """
+    1) Description:
+       Generates random variates from a GPD distribution
 
-    # FUNCTION:
-
+    2) Input parameters:
+        shape, location, scale = the parameter estimates that can be either manually input or taken from Fitbygpdpwm function
+        n = number of simulated observations
+        seed = by default None
+    3) Result:
+        list of simulate values from generalized pareto distribution
+    """
     # Seed:
     if seed is None:
         seed = None
@@ -145,10 +159,14 @@ def gpdSimulation(shape= 0.25, location = 0, scale = 1, n = 1000, seed = None):
 
 def depd(x, location = 0, scale = 1, shape = 0, log = False):
     """
-    Description: 
-        x is the data element obtained from Fitbygpdpwm function
+    1) Description: 
+        Density for the Generalized Pareto distribution function
 
-    Example:
+    2) Input parameters:
+        scale, location, shape: parameters of GPD
+        x is the data element obtained from Fitbygpdpwm function 
+        log= by default False
+    3) Example:
         fit=Fitbygpdpwm(dataframe, ci=0.95, threshold=None)
         depd(fit['data'], location, scale=fit['scale'],shape= fit['shape'], log=False)
 
@@ -188,21 +206,20 @@ def depd(x, location = 0, scale = 1, shape = 0, log = False):
     return dd
 
 
-
-#p=pepd(data, location = 0, scale =0.66881603 , shape = 0.06871239, lowertail = True)
 def pgpd(q, location = 0, scale = 1, shape = 1, lowertail = True):
+    """
+    1) Description: 
+        Probability for the Generalized Pareto distribution function
 
-
-
-    # Probability:
-    # Check:
+    2) Input parameters:
+        scale, location, shape: parameters of GPD
+        lowertail = by default True
+    """
     if min([scale])<0:
         sys.exit()
     if len([shape])!=1:
         sys.exit()
 
-
-    # Probability:
     q = (np.maximum(i - location, 0)/scale for i in q)
     if shape == 0:
         p = [1 - np.exp(-i) for i in q]
@@ -210,22 +227,29 @@ def pgpd(q, location = 0, scale = 1, shape = 1, lowertail = True):
     else:
         p = [1-np.maximum(1 + shape * i, 0)**(-1/shape) for i in q]
 
-    # Lower Tail:
+    #Lower Tail:
     if lowertail:
         pass
     else:
         p=[1-i for i in p]
 
-    # Return Value:
     return p
 
 
 
 
 
-#q=qepd(p, location = 0, scale =0.66881603 , shape = 0.06871239, lowertail = True)
-def qgpd( p, location = 0, scale = 1,shape = 1, lowertail = True):
 
+def qgpd( p, location = 0, scale = 1,shape = 1, lowertail = True):
+    """
+    1) Description: 
+        Quantiles for the Generalized Pareto distribution function
+
+    2) Input parameters:
+        scale, location, shape: parameters of GPD
+        lowertail = by default True
+
+    """
     if min([scale])<0:
         sys.exit()
     if len([shape])!=1:
@@ -234,7 +258,6 @@ def qgpd( p, location = 0, scale = 1,shape = 1, lowertail = True):
         sys.exit()
     if np.nanmax(p) >1:
         sys.exit()
-    # Lower Tail:
     if lowertail:
         p= np.array([1 - k for k in p])
     # Quantiles:
@@ -242,20 +265,19 @@ def qgpd( p, location = 0, scale = 1,shape = 1, lowertail = True):
         q = location - scale * np.log(p)
     else:
         q = location + scale * (p**(-shape) - 1)/shape
-
-    # Return Value:
     return q
 
 
 def gpdMoments(shape = 1, location = 0, scale = 1):
 
     """
-    Description:
+    1) Description:
        Compute true statistics for Generalized Pareto distribution
 
-    Arguments:
+    2) Input parameter:
+        shape, location, scale parameters from generalized pareto distribution 
 
-    Value:
+    3) Value:
       Returns true mean of Generalized Pareto distribution
       for xi < 1 else NaN
       Returns true variance of Generalized Pareto distribution
@@ -270,12 +292,7 @@ def gpdMoments(shape = 1, location = 0, scale = 1):
     a = [1, np.nan, np.nan]
     gpdVar = scale*scale/(1-shape)**2/(1-2*shape) * a[int(np.sign(2*shape-1)+1)]
 
-    # Result:
     param = '%s %f %s %f %s %f'  % ("Shape=",shape, "Location=", location, "Scale=", scale)
     ans = '%s %s %f %s %f' % (param, "mean = ",gpdMean, "var =", gpdVar)
 
-    # Return Value:
     return ans
-
-
-
