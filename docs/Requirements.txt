@@ -1,1 +1,6 @@
-sphinx_glpi_theme
+      'numpy',
+      'pandas',
+      'scipy',
+      'matplotlib',
+      'seaborn',
+'sphinx_glpi_theme'
