@@ -8,7 +8,7 @@ The 'gpdpwmFit' module facilitates fitting a timeseries data with Generalized pa
 probability weighted moments estimation method for parameter estimates. It also provide key distribution statistics, 
 Risk measures and GPD simulated values. 
 
-.. automodule:: gpdpwmFit
+.. automodule:: pwmdist.gpdpwmFit
    :members:
    :undoc-members:
    :show-inheritance:
@@ -19,7 +19,7 @@ The 'gpdplots' module facilitates the essential visualization of empirical disti
 , tail estimates from GPD model (from 'Fitbygpdpwm' method) and residual plots.
 
 
-.. automodule:: gpdplots
+.. automodule:: pwmdist.gpdplots
    :members:
    :undoc-members:
    :show-inheritance:
