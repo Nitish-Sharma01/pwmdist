@@ -13,12 +13,6 @@ simulated values related to many distributions.
 
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 pwmdist
 =======
