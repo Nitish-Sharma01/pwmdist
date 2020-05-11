@@ -20,5 +20,5 @@ pwmdist
 .. toctree::
    :maxdepth: 4
 
-   pwmdist
+   pwmdist.rst
 
